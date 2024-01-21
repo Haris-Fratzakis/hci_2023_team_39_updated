@@ -60,20 +60,24 @@ class MusicPlayerState extends State<music_player> {
       return ;
     }
 
-
+    //Music Player was debugged with Drive links, however music files were downloaded for the release apk
     switch(type){
       case "battle":
-      await player.setUrl("https://drive.google.com/uc?export=view&id=17W9-MV7B45hJyCOUg4sQZ6IXUUmCeBkN");
+      await player.setAsset("assets/songs/battle.mp3");
+      //await player.setUrl("https://drive.google.com/uc?export=view&id=17W9-MV7B45hJyCOUg4sQZ6IXUUmCeBkN");
 
       break;
       case "tavern":
-        await player.setUrl("https://drive.google.com/uc?export=view&id=1sdsGxFXMpL4GWetGOs-73mPD_y832hQ3");
+        await player.setAsset("assets/songs/tavern.mp3");
+        //await player.setUrl("https://drive.google.com/uc?export=view&id=1sdsGxFXMpL4GWetGOs-73mPD_y832hQ3");
       break;
       case "mystery":
-        await player.setUrl("https://drive.google.com/uc?export=view&id=1sZWTHoFsCXrh5h-PXjQNWKYWtuBtpjvR");
+        await player.setAsset("assets/songs/mystery.mp3");
+        //await player.setUrl("https://drive.google.com/uc?export=view&id=1sZWTHoFsCXrh5h-PXjQNWKYWtuBtpjvR");
       break;
       default:
-        await player.setUrl("https://drive.google.com/uc?export=view&id=17W9-MV7B45hJyCOUg4sQZ6IXUUmCeBkN");
+        await player.setAsset("assets/songs/battle.mp3");
+        //await player.setUrl("https://drive.google.com/uc?export=view&id=17W9-MV7B45hJyCOUg4sQZ6IXUUmCeBkN");
       break;
     }
     current = type;
