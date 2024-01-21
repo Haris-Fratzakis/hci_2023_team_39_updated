@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'character_creation.dart';
+import 'dice_roller.dart';
+import 'music_player.dart';
 void main() {
   runApp(MyApp());
 }
@@ -50,7 +52,7 @@ class MainScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => MusicPlayerPage()),
+                  MaterialPageRoute(builder: (context) => music_player()),
                 );
               },
               child: Text('Music Player'),
@@ -73,20 +75,6 @@ class MainScreen extends StatelessWidget {
 
 
 
-
-class DiceRollerPage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Dice Roller'),
-      ),
-      body: Center(
-        child: Text('Dice Roller Page'),
-      ),
-    );
-  }
-}
 
 class MusicPlayerPage extends StatelessWidget {
   @override
