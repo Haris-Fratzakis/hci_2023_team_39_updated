@@ -11,6 +11,7 @@ class CharacterCreationPage extends StatefulWidget {
 class CharacterCreationPageState extends State<CharacterCreationPage> {
   int currentQuestionIndex = 0;
   Map<String, dynamic> answers = {};
+  bool _isLoading = false; // Add this line
 
   final textController = TextEditingController(); // Controller for open-ended questions
 
@@ -125,22 +126,30 @@ class CharacterCreationPageState extends State<CharacterCreationPage> {
   }
 
   void _submitAnswers() async {
-    var url = Uri.parse('http://10.0.2.2:8000/character_creator/');
-    print(jsonEncode(answers));
-    var response = await http.post(url, body: jsonEncode(answers));
-    if (!mounted) return; // Add this line to check if the widget is still in the tree
+  setState(() {
+    _isLoading = true; // Start loading
+  });
 
-    if (response.statusCode == 200) {
-      var result = jsonDecode(response.body);
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => CharacterDisplayPage(result: result)),
-      );
-    } else {
-      // Handle error
-      print('Request failed with status: ${response.statusCode}.');
-    }
+  var url = Uri.parse('https://dnd-assisstant.oa.r.appspot.com/character_creator/');
+  print(jsonEncode(answers));
+  var response = await http.post(url, body: jsonEncode(answers));
+  if (!mounted) return; // Add this line to check if the widget is still in the tree
+
+  setState(() {
+    _isLoading = false; // Stop loading when the request is done
+  });
+
+  if (response.statusCode == 200) {
+    var result = jsonDecode(response.body);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => CharacterDisplayPage(result: result)),
+    );
+  } else {
+    // Handle error
+    print('Request failed with status: ${response.statusCode}.');
   }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -149,7 +158,9 @@ class CharacterCreationPageState extends State<CharacterCreationPage> {
       appBar: AppBar(
         title: Text('Character Creation'),
       ),
-      body: SingleChildScrollView(
+      body: _isLoading
+        ? Center(child: CircularProgressIndicator()) // Show loading indicator
+        :SingleChildScrollView(
         padding: EdgeInsets.all(20.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
