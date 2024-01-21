@@ -6,8 +6,9 @@ import 'dart:math' as math;
 // DiceWidget Code
 class DiceWidget extends StatelessWidget {
   final int diceNumber;
+  final Function() onRollButtonPressed;
 
-  DiceWidget({Key? key, required this.diceNumber}) : super(key: key); // Marked as required
+  DiceWidget({super.key, required this.diceNumber, required this.onRollButtonPressed});
 
 
 
@@ -32,6 +33,14 @@ class DiceWidget extends StatelessWidget {
               ],
             ),
           ),
+          Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Text('Alternatively, you can also press this button', style: TextStyle(fontSize: 16.0),),
+          ),
+          ElevatedButton(
+            onPressed: onRollButtonPressed,
+            child: Text('Roll'),
+          ),
         ],
       ),
     );
@@ -47,13 +56,13 @@ class DiceRollerPage extends StatefulWidget {
 class DiceRollerPageState extends State<DiceRollerPage> {
   int diceNumber = 1;
   bool isRolling = false;
-   Timer? _timer; // Store the timer
+  Timer? _timer; // Store the timer
 
   @override
   void initState() {
     super.initState();
     accelerometerEvents.listen((AccelerometerEvent event) {
-      if (!isRolling && event.x.abs() + event.y.abs() + event.z.abs() > 30  ) {
+      if (!isRolling && event.x.abs() + event.y.abs() + event.z.abs() > 30) {
         // Start rolling the dice
         isRolling = true;
         _rollDice();
@@ -81,13 +90,24 @@ class DiceRollerPageState extends State<DiceRollerPage> {
     });
   }
 
+  void _handleRollButtonPressed() {
+    if (!isRolling) {
+      // Roll the dice manually when the button is pressed
+      isRolling = true;
+      _rollDice();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Dice Roller'),
       ),
-      body: DiceWidget(diceNumber: diceNumber),
+      body: DiceWidget(
+        diceNumber: diceNumber,
+        onRollButtonPressed: _handleRollButtonPressed,
+      ),
     );
   }
 
