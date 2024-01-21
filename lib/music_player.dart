@@ -63,8 +63,8 @@ class MusicPlayerState extends State<music_player> {
 
     switch(type){
       case "battle":
-       // await player.setUrl("https://drive.google.com/uc?export=view&id=17W9-MV7B45hJyCOUg4sQZ6IXUUmCeBkN");
-        await player.setAsset("assets/songs/battle.mp3");
+      await player.setUrl("https://drive.google.com/uc?export=view&id=17W9-MV7B45hJyCOUg4sQZ6IXUUmCeBkN");
+
       break;
       case "tavern":
         await player.setUrl("https://drive.google.com/uc?export=view&id=1sdsGxFXMpL4GWetGOs-73mPD_y832hQ3");
