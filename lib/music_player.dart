@@ -60,20 +60,24 @@ class MusicPlayerState extends State<music_player> {
       return ;
     }
 
-
+    //Music Player was debugged with Drive links, however music files were downloaded for the release apk
     switch(type){
       case "battle":
-      await player.setUrl("https://drive.google.com/uc?export=view&id=17W9-MV7B45hJyCOUg4sQZ6IXUUmCeBkN");
+      await player.setAsset("assets/songs/battle.mp3");
+      //await player.setUrl("https://drive.google.com/uc?export=view&id=17W9-MV7B45hJyCOUg4sQZ6IXUUmCeBkN");
 
       break;
       case "tavern":
-        await player.setUrl("https://drive.google.com/uc?export=view&id=1sdsGxFXMpL4GWetGOs-73mPD_y832hQ3");
+        await player.setAsset("assets/songs/tavern.mp3");
+        //await player.setUrl("https://drive.google.com/uc?export=view&id=1sdsGxFXMpL4GWetGOs-73mPD_y832hQ3");
       break;
       case "mystery":
-        await player.setUrl("https://drive.google.com/uc?export=view&id=1sZWTHoFsCXrh5h-PXjQNWKYWtuBtpjvR");
+        await player.setAsset("assets/songs/mystery.mp3");
+        //await player.setUrl("https://drive.google.com/uc?export=view&id=1sZWTHoFsCXrh5h-PXjQNWKYWtuBtpjvR");
       break;
       default:
-        await player.setUrl("https://drive.google.com/uc?export=view&id=17W9-MV7B45hJyCOUg4sQZ6IXUUmCeBkN");
+        await player.setAsset("assets/songs/battle.mp3");
+        //await player.setUrl("https://drive.google.com/uc?export=view&id=17W9-MV7B45hJyCOUg4sQZ6IXUUmCeBkN");
       break;
     }
     current = type;
@@ -100,12 +104,10 @@ class MusicPlayerState extends State<music_player> {
               icon: const Icon(Icons.arrow_back)
           )
               : null,
-          //title: Text("Test"),
           backgroundColor: Theme.of(context).colorScheme.primary,
           title: Text("Music Player"),
           centerTitle: true,
         ),
-       // backgroundColor: Colors.green[900], // background color
         body: Center(
 
           child: Column(
@@ -128,11 +130,11 @@ class MusicPlayerState extends State<music_player> {
                 onPressed: () => {pause_music(), play_music("tavern")},
                 child: Text(
                   'Tavern Music',
-                  style: TextStyle(fontSize: 20, color: Colors.black),
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(MediaQuery.of(context).size.width * 0.8, MediaQuery.of(context).size.width * 0.2),
-                  backgroundColor: Colors.yellow[500]
+                  backgroundColor: Colors.green[900]
                 ),
               ),
               SizedBox(height: 80),
