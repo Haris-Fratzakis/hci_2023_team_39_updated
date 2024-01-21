@@ -14,13 +14,23 @@ class DiceWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Stack(
-        alignment: Alignment.center,
+      child: Column(
         children: [
-          Image.asset('assets/images/dice.png'), // Your dice image
-          Text(
-            '$diceNumber',
-            style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold, color: Colors.black),
+          Padding(
+            padding: const EdgeInsets.all(18.0),
+            child: Text('Shake your phone to roll the die', style: TextStyle(fontSize: 20.0),),
+          ),
+          Center(
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Image.asset('assets/images/dice.png'), // Your dice image
+                Text(
+                  '$diceNumber',
+                  style: TextStyle(fontSize: 60, fontWeight: FontWeight.bold, color: Colors.black),
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -37,6 +47,7 @@ class DiceRollerPage extends StatefulWidget {
 class DiceRollerPageState extends State<DiceRollerPage> {
   int diceNumber = 1;
   bool isRolling = false;
+   Timer? _timer; // Store the timer
 
   @override
   void initState() {
@@ -52,11 +63,13 @@ class DiceRollerPageState extends State<DiceRollerPage> {
 
   void _rollDice() {
     const rollDuration = Duration(milliseconds: 100);
-    Timer.periodic(rollDuration, (timer) {
+    _timer = Timer.periodic(rollDuration, (timer) {
       if (isRolling) {
-        setState(() {
-          diceNumber = math.Random().nextInt(20) + 1;
-        });
+        if (mounted) {
+          setState(() {
+            diceNumber = math.Random().nextInt(20) + 1;
+          });
+        }
       } else {
         timer.cancel();
       }
@@ -76,5 +89,11 @@ class DiceRollerPageState extends State<DiceRollerPage> {
       ),
       body: DiceWidget(diceNumber: diceNumber),
     );
+  }
+
+  @override
+  void dispose() {
+    _timer?.cancel(); // Cancel the timer to avoid memory leaks
+    super.dispose();
   }
 }

@@ -98,7 +98,7 @@ class ARMapPage extends StatelessWidget {
         title: Text('AR Map'),
       ),
       body: Center(
-        child: Text('AR Map Page'),
+        child: Text('AR currently not implemented'),
       ),
     );
   }
