@@ -104,12 +104,10 @@ class MusicPlayerState extends State<music_player> {
               icon: const Icon(Icons.arrow_back)
           )
               : null,
-          //title: Text("Test"),
           backgroundColor: Theme.of(context).colorScheme.primary,
           title: Text("Music Player"),
           centerTitle: true,
         ),
-       // backgroundColor: Colors.green[900], // background color
         body: Center(
 
           child: Column(
@@ -132,11 +130,11 @@ class MusicPlayerState extends State<music_player> {
                 onPressed: () => {pause_music(), play_music("tavern")},
                 child: Text(
                   'Tavern Music',
-                  style: TextStyle(fontSize: 20, color: Colors.black),
+                  style: TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 style: ElevatedButton.styleFrom(
                   minimumSize: Size(MediaQuery.of(context).size.width * 0.8, MediaQuery.of(context).size.width * 0.2),
-                  backgroundColor: Colors.yellow[500]
+                  backgroundColor: Colors.green[900]
                 ),
               ),
               SizedBox(height: 80),

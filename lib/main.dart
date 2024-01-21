@@ -22,9 +22,16 @@ class MyApp extends StatelessWidget {
 class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return MaterialApp(title: 'Flutter Demo',
+    theme: ThemeData(
+    brightness: Brightness.dark,
+        // colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        //useMaterial3: true,
+    ),
+    home: Scaffold(
       appBar: AppBar(
         title: Text('DnD Companion'),
+        backgroundColor: Theme.of(context).colorScheme.primary,
       ),
       body: Center(
         child: Column(
@@ -37,8 +44,15 @@ class MainScreen extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => CharacterCreationPage()),
                 );
               },
-              child: Text('Character Creation'),
+              child: Text('Character Creation',
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+              style: ElevatedButton.styleFrom(
+                  minimumSize: Size(MediaQuery.of(context).size.width * 0.8, MediaQuery.of(context).size.width * 0.2),
+                  backgroundColor: Colors.purple[900]
+              ),
             ),
+            SizedBox(height: 60),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -46,8 +60,15 @@ class MainScreen extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => DiceRollerPage()),
                 );
               },
-              child: Text('Dice Roller'),
+              child: Text('Dice Roller',
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+              style: ElevatedButton.styleFrom(
+                  minimumSize: Size(MediaQuery.of(context).size.width * 0.8, MediaQuery.of(context).size.width * 0.2),
+                  backgroundColor: Colors.purple[900]
+              ),
             ),
+            SizedBox(height: 60),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -55,8 +76,15 @@ class MainScreen extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => music_player()),
                 );
               },
-              child: Text('Music Player'),
+              child: Text('Music Player',
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+              style: ElevatedButton.styleFrom(
+                  minimumSize: Size(MediaQuery.of(context).size.width * 0.8, MediaQuery.of(context).size.width * 0.2),
+                  backgroundColor: Colors.purple[900]
+              ),
             ),
+            SizedBox(height: 60),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(
@@ -64,11 +92,18 @@ class MainScreen extends StatelessWidget {
                   MaterialPageRoute(builder: (context) => ARMapPage()),
                 );
               },
-              child: Text('AR Map'),
+              child: Text('AR Map',
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+              style: ElevatedButton.styleFrom(
+                  minimumSize: Size(MediaQuery.of(context).size.width * 0.8, MediaQuery.of(context).size.width * 0.2),
+                  backgroundColor: Colors.purple[900]
+              ),
             ),
           ],
         ),
       ),
+    ),
     );
   }
 }
